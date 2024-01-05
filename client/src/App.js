@@ -1,6 +1,7 @@
 import React from 'react';
 import List from './components/List';
-
+import AddTask from './components/addTask';
+import "./App.css";
 
 function App() {
 
@@ -8,6 +9,7 @@ function App() {
   return (
     <div>
       <List />
+      <AddTask />
     </div>
   );
 }

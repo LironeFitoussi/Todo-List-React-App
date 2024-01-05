@@ -6,9 +6,9 @@ const port = 5000
 app.use(bodyParser.json());
 
 const todoData = [
-    { id: 1, description: "get a job" },
-    { id: 2, description: "buy milk" },
-    { id: 3, description: "make coffee for dad" }
+    { id: 1, description: "get a job", dueTime: "None" },
+    { id: 2, description: "buy milk", dueTime: "None" },
+    { id: 3, description: "make coffee for dad", dueTime: "None" }
 ]
 
 let lastID;
@@ -25,6 +25,7 @@ const findAvailableID = () => {
 
 app.get("/", (req, res) => {
     res.send("<h1> test </h1>")
+
 })
 
 app.get("/todo-data", (req, res) => {
@@ -32,16 +33,22 @@ app.get("/todo-data", (req, res) => {
 });
 
 app.post("/new-task", (req, res) => {
-    todoData.push({ id: findAvailableID(), description: req.body.task, due_time: req.body.dueTime })
+    const { title, dueTime } = req.body;
+
+    todoData.push({
+        id: findAvailableID(),
+        description: title,
+        due_time: dueTime,  // Assuming title corresponds to due_time
+    });
+
     todoData.sort((a, b) => a.id - b.id);
-    res.json(todoData)
+    res.json(todoData);
 });
 
 app.delete("/remove-task", (req, res) => {
     let itemIndex = todoData.findIndex((item) => {
         return item.id == req.body.id
     });
-    console.log(req.body.id);
     todoData.splice(itemIndex, 1)
     res.json(todoData)
     lastID = todoData.length

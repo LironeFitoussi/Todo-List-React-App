@@ -25,7 +25,7 @@ function Task(props) {
 
     return (
         <div>
-            <li>{props.content}</li>
+            <li>{props.content} , {props.dueTime}</li>
             <button onClick={handleDelete}>Delete</button>
         </div>
     );

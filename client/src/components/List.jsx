@@ -9,6 +9,7 @@ function List() {
             .then(response => response.json())
             .then(data => {
                 setBackendData(data);
+                console.log(data);
             });
     }, []);
 
@@ -19,6 +20,7 @@ function List() {
                 <Task
                     id={task.id}
                     content={task.description}
+                    dueTime={task.dueTime}
                 />
 
             ))}
